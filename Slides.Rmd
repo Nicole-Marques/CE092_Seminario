@@ -17,11 +17,11 @@ output:
     number_sections: false
 ---
 
-### Sinais
+## Sinais
 
-### Tranformações
+## Tranformações
 
-#### Transformações de Fourrier
+### Transformações de Fourrier
 
 ### Transformação de Wavelet
 
