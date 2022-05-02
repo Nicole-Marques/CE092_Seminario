@@ -1,10 +1,18 @@
 ---
 title: "Estimador de Wavelet"
-author: 
- - Bianca Salles Trentin (GRR20160214)
- - Nicole Sofia Herman Marques (GRR20170387)
+author:
+- Alexandre Morales Diaz (GRR20137536)
+- Bianca Salles Trentin (GRR20160214)
+- Nicole Sofia Herman Marques (GRR20170387)
 date: "`r Sys.Date()`"
-output: github_document
+output: beamer_presentation
 ---
 
+
 ## 
+
+
+
+
+
+
