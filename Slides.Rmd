@@ -17,9 +17,6 @@ output:
     number_sections: false
 ---
 
-
-## Estimador de Wavelet
-
 ### Sinais
 
 ### Tranformações
@@ -28,7 +25,19 @@ output:
 
 ### Transformação de Wavelet
 
+## Estimador de Wavelet
 
+### História
 
+### Teoria (Embasamento)
 
+### Teoria (Desenvolvimento / fórmulas)
+
+### Teoria (Aplicação)
+
+### Aplicação
+
+## Considerações Finais
+
+## ReferÊncias Bibliográficos
 
