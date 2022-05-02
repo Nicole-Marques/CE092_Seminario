@@ -27,15 +27,19 @@ output:
 
 ## Tranformações
 
-- Tranformação de uma função *s(t)* é uma operação matemática que resultará em uma diferente representação da mesma
+- Tranformação de uma função *f(t)* é uma operação matemática que resultará em uma diferente representação da mesma
 
 - Considerando o caso de sinais, funções da variável independente *t*, temos que transformações vão... **COMPLETAR**
 
 ### Transformações de Fourrier
 
-- Irá retornar o espectro do sinal (**O Q ISSO SIGNIFICA?**)
+- Transforma um sinal *f(t)*, sendo $f(\cdot)$ função do tempo *t*, em uma função de frequência, em uma soma de funções sinusoidais.
+
+$$F(\omega)\ =\ \int_{-\infty}^{\infty}f(t)\ e^{i\omega\ t}d\omega$$
 
 ### Transformação de Wavelet
+
+- 
 
 ## Estimador de Wavelet
 
