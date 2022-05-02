@@ -7,15 +7,12 @@ author:
 - Nicole Sofia Herman Marques (GRR20170387)
 - Wagner Cassiano Cavalari da Silva (GRR20160208)
 date: "`r Sys.Date()`"
-output: 
-  beamer_presentation
-    toc: true
-      toc_depth: 2
-     toc_flaot:
-      collapsed: false
-      smooth_scroll: false
-    number_sections: false
+output: beamer_presentation
 ---
+
+```{r, output = F}
+library(tidyr)
+```
 
 ## Sinais
 
@@ -35,15 +32,19 @@ output:
 
 - Transforma um sinal *f(t)*, sendo $f(\cdot)$ função do tempo *t*, em uma função de frequência, em uma soma de funções sinusoidais.
 
-$$F(\omega)\ =\ \int_{-\infty}^{\infty}f(t)\ e^{i\omega\ t}d\omega$$
+$$F(\omega)\ =\ \int_{-\infty}^{\infty}f(t)\ e^{-i\omega\ t}d\omega$$
 
 ### Transformação de Wavelet
 
-- 
+- Mapeia uma função *f(t)* onde *t* é a variável independente tempo, em uma função bidimencional onde *a* é referente a escala e $\tau$ é o parâmetro de deslocamento.
+
+$$F(a,\ \tau)\ =\ \frac{1}{\sqrt{a}}\ \int_{-\infty}^{\infty}f(t)\ \psi\ (\ \frac{t\ -\ \tau}{a}\ )\ dt$$
+
+$$F(m,\ n)\ =\ a_o^{-\frac{m}{2}}\ \int_{-\infty}^{\infty}f(t)\ \psi\ (\ a_o^{-m}\ t-n\ \tau_o\ )\ dt$$
 
 ## Estimador de Wavelet
 
-### História
+
 
 ### Teoria (Embasamento)
 
@@ -59,3 +60,4 @@ $$F(\omega)\ =\ \int_{-\infty}^{\infty}f(t)\ e^{i\omega\ t}d\omega$$
 
 <!-- https://x-engineer.org/signal/" -->
 
+Wavelet Basics, 1995, Y.T.Chan
