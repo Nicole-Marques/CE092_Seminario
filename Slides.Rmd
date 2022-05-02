@@ -4,6 +4,7 @@ author:
 - Alexandre Morales Diaz (GRR20137536)
 - Bianca Salles Trentin (GRR20160214)
 - Nicole Sofia Herman Marques (GRR20170387)
+- Wagner Cassiano Cavalari da Silva (GRR20160208)
 date: "`r Sys.Date()`"
 output: 
   beamer_presentation
