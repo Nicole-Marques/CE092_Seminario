@@ -5,9 +5,15 @@ author:
 - Bianca Salles Trentin (GRR20160214)
 - Nicole Sofia Herman Marques (GRR20170387)
 date: "`r Sys.Date()`"
-output: beamer_presentation
+output: 
+  beamer_presentation
+    toc: true
+      toc_depth: 2
+     toc_flaot:
+      collapsed: false
+      smooth_scroll: false
+    number_sections: false
 ---
-
 
 ## 
 
