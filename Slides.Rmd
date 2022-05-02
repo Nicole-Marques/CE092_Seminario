@@ -36,11 +36,7 @@ $$F(\omega)\ =\ \int_{-\infty}^{\infty}f(t)\ e^{-i\omega\ t}d\omega$$
 
 ### Transformação de Wavelet
 
-- Mapeia uma função *f(t)* onde *t* é a variável independente tempo, em uma função bidimencional onde *a* é referente a escala e $\tau$ é o parâmetro de deslocamento.
-
-$$F(a,\ \tau)\ =\ \frac{1}{\sqrt{a}}\ \int_{-\infty}^{\infty}f(t)\ \psi\ (\ \frac{t\ -\ \tau}{a}\ )\ dt$$
-
-$$F(m,\ n)\ =\ a_o^{-\frac{m}{2}}\ \int_{-\infty}^{\infty}f(t)\ \psi\ (\ a_o^{-m}\ t-n\ \tau_o\ )\ dt$$
+- X
 
 ## Estimador de Wavelet
 
