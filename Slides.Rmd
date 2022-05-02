@@ -19,7 +19,15 @@ output:
 
 ## Sinais
 
+- Abstração de valores de uma variável onde a mesma é função de, ao menos, uma variável independente *t* (usualmente, tempo)
+
+- Espaço
+ * Contínuo: mensurável para todos os instantes de *t*
+ * Discreto: mensurável apenas em intervalos específicos de *t*
+
 ## Tranformações
+
+
 
 ### Transformações de Fourrier
 
@@ -41,3 +49,4 @@ output:
 
 ## ReferÊncias Bibliográficos
 
+<!-- https://x-engineer.org/signal/" -->
