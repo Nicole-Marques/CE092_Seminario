@@ -1,8 +1,16 @@
 ---
-title: "Slide"
-author: "Bianca Trentin"
+title: "Wavelet"
+author: 
+- Alexandre Morales Diaz (GRR20137536) 
+- Bianca Salles Trentin (GRR20160214) 
+- Nicole Sofia Herman Marques (GRR20170387)
+- Wagner Cassiano Cavalari da Silva (GRR20160208)
 date: "02/05/2022"
-output: beamer_presentation
+output:
+  beamer_presentation:
+    theme: "AnnArbor"
+    colortheme: "dolphin"
+    fonttheme: "structurebold"
 ---
 
 ```{r setup, include=FALSE}
