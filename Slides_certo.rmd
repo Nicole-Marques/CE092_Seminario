@@ -1,11 +1,11 @@
 ---
 title: "Wavelet"
 author: 
-- Alexandre Morales Diaz (GRR20137536) 
-- Bianca Salles Trentin (GRR20160214) 
-- Nicole Sofia Herman Marques (GRR20170387)
-- Wagner Cassiano Cavalari da Silva (GRR20160208)
-date: "02/05/2022"
+- Alexandre M. Diaz  
+- Bianca S. Trentin 
+- Nicole S. H. Marques
+- Wagner C. C. da Silva 
+date: "05/05/2022"
 output:
   beamer_presentation:
     theme: "AnnArbor"
@@ -19,11 +19,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Conhecendo o Wavelet
   
-- Wavelet é uma função capaz de decompor e representar outra função (eg.: uma série de dados) originalmente descrita no domínio do tempo. 
+- *Wavelet* é uma função capaz de decompor e representar outra função (*eg.: uma série de dados*) originalmente descrita no domínio do tempo. 
 
-- A decomposição de uma função wavelets é conhecida como "transformada wavelet" e tem suas variantes contínuas e discreta. 
+- A decomposição de uma função *wavelets* é conhecida como "transformada wavelet" e tem suas variantes contínuas e discretas. 
 
-- Devido a sua capacidade de decompor as funções (domínio da frequência, domínio do tempo), ests tipo de função possui ampla aplicação:
+- Devido a sua capacidade de decompor as funções (domínio da frequência, domínio do tempo), este tipo de função possui ampla aplicação:
   - Processamento de sinais:
      * Compreensão de dados.
      * Eliminação de ruído.
@@ -48,9 +48,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Características da função Wavelets
   
-Para ser considerada uma wavelet, uma função deve atender as seguintes características:
+Para ser considerada uma *wavelet*, uma função deve atender as seguintes características:
   
-1. A área toral sob a curva da função é 0, ou seja $$\int_{- \infty}^{\infty} \psi(t) dt = 0.$$
+1. A área total sob a curva da função é 0, ou seja $$\int_{- \infty}^{\infty} \psi(t) dt = 0.$$
   
 2. A energia da função finita, ou seja, $$\int_{- \infty}^{\infty} |\psi(t)|^2 dt < 0, \, L \in \mathbb{N}.$$
   
@@ -60,19 +60,19 @@ Isto equivale a dizer que $\psi(t)$ é um quadrado integrável.
 
 # Características 
 
-* Essa característica dita energia concentrada em uma região finita é que diferência a análise wavelets da análise de Fourier.
+* Essa característica dita energia concentrada em uma região finita é que diferencia a análise wavelets da análise de Fourier.
 
 * Uma maneira alternativa de expressar a característica de regularidade é dizer que a transformação wavelet é um operador local no domínio do tempo.
 
-* Para ser utilizada na análise de sinais a função wavelet precisa de outra característica que é chamada de **condição de admissibilidade** a qual permite a transformada inversa de wavelet.
+* Para ser utilizada na análise de sinais a função wavelet precisa de outra característica que é chamada de **condição de admissibilidade** a qual permite a transformação inversa de wavelet.
 
 ---
 
-Exemplo de funções que atendem a esta característica: wevelet de Morlet: inserir função e figura
+![Morlete](WaveletMorlet.png)
 
 ---
 
-chapéu mexicano: inserir a função e a  imagem
+![Chapéu mexicano](WaveletMex_Hat.png)[width = 800px]
 
 ---
 
@@ -111,6 +111,8 @@ $$\Psi(\omega) = \int_{- \infty}^{\infty} \psi(t)e^{-i \omega t} \, dt = \sqrt{a
   
 onde $\omega = \frac{2 \pi}{a}$.
 
+---
+
 E se W(a, b) for a transformada de wavelet da função f(t) usando a wavelet $\psi(t)$, então temos que a transformada inversa dada por:
 $$f(t) = \frac{1}{C} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \frac{1}{|a|^2} W(a,b) \psi_{a,b}(t) \, da \, db $$  
   
@@ -129,4 +131,172 @@ quanto mais próximo de 1 o valor de N, mais a versão discreta se aproxima da v
   
 # Aplicação computacional   
 
+* Bancos de dados: PETRA4 e ITSA4.
   
+* Área de finanças: dados de ações (período: Janeiro/2018 até Novembro/2018).
+  
+* A série será considerada em um período de 12 meses, pois os dados são coletados mensalmente.
+
+---
+
+## Possibilidades da análise:
+
+* O que está análise nos permite?
+ - Estimar o grau de correlação entre as variáveis em uma quantidade maior de frequências,  verificando o comportamento da relação ao longo do tempo. 
+ - Não precisamos assumir que os dados são estacionários. 
+ 
+ * Pacotes utilizados:
+   
+library(readr)
+  
+library(WaveletComp)
+  
+library(astsa)
+  
+# Analisando as séries:
+
+## Ações PETR4:
+  
+```{r, include=FALSE}
+setwd("~/Exten. de modelos/CE092_Seminario-main/CE092_Seminario-main")
+library(readr)
+library(WaveletComp)
+library(astsa)
+
+da1 <- read.csv("PETR4 Dados Historicos (1).csv", 
+                header = T, sep = ";", dec = ",")
+
+da2 <- read.csv("ITSA4 Dados Historicos (1).csv", 
+                header = T, sep = ";", dec = ",")
+
+```
+
+```{r, echo = TRUE}
+# Variável de interesse
+petr4 <- da1$Maxima
+```
+---
+
+```{r, echo = TRUE}
+ts.plot(ts(petr4, start(2012, 1)))
+```
+
+---
+
+```{r, results = "hide", echo = TRUE}
+# Inserindo frequência:
+petr4 <- periodic.series(start.period = 1, end.period = 12)
+
+data <- data.frame(petr4 = petr4)
+```
+---
+
+```{r, results = "hide", echo = TRUE}
+# Aplicando a transformada:
+my.w <- analyze.wavelet(data, "petr4", loess.span = 0, 
+                       dt = 1, make.pval = T, n.sim = 10)
+```
+
+```{r, include = FALSE}
+# Aplicando a transformada:
+my.w <- analyze.wavelet(data, "petr4", loess.span = 0, 
+                       dt = 1, make.pval = T, n.sim = 10)
+```
+---
+
+```{r, results = "hide", echo = TRUE}
+reconstruct(my.w, plot.waves = F, lwd = c(1,2), legend.coords = "bottomleft")
+```
+
+```{r, include = FALSE}
+#série original conjuntamente com a série reconstruída apenas com os períodos #significantes.
+reconstruct(my.w, plot.waves = F, lwd = c(1,2), legend.coords = "bottomleft")
+```
+
+---
+
+```{r, results = "hide", echo = TRUE}
+wt.image(my.w, color.key = "quantile", n.levels = 250, legend.params = list(lab = "wavelet power levels", mar = 4.7))
+
+```
+
+```{r, include = FALSE}
+# Para plotar o espectro de potência da Wavelet faremos:
+wt.image(my.w, color.key = "quantile", n.levels = 250, legend.params = list(lab = "wavelet power levels", mar = 4.7))
+```
+---
+
+## Ações ITSA4:
+
+```{r, echo = TRUE}
+# Variável de interesse
+itsa4 <- da2$Maxima
+```
+---
+
+```{r, echo = TRUE}
+ts.plot(ts(itsa4, start(2012, 1)))
+```
+
+
+
+---
+
+```{r, results = "hide", echo = TRUE}
+# Inserindo frequência:
+itsa4 <- periodic.series(start.period = 1, end.period = 12)
+
+data <- data.frame(itsa4 = itsa4)
+```
+---
+
+```{r, results = "hide", echo = TRUE}
+# Aplicando a transformada:
+my.w <- analyze.wavelet(data, "itsa4", loess.span = 0, 
+                       dt = 1, make.pval = T, n.sim = 10)
+```
+
+```{r, include = FALSE}
+# Aplicando a transformada:
+my.w <- analyze.wavelet(data, "itsa4", loess.span = 0, 
+                       dt = 1, make.pval = T, n.sim = 10)
+```
+---
+
+```{r, results = "hide", echo = TRUE}
+reconstruct(my.w, plot.waves = F, lwd = c(1,2), legend.coords = "bottomleft")
+```
+
+```{r, include = FALSE}
+#série original conjuntamente com a série reconstruída apenas com os períodos #significantes.
+reconstruct(my.w, plot.waves = F, lwd = c(1,2), legend.coords = "bottomleft")
+```
+
+---
+
+```{r, results = "hide", echo = TRUE}
+wt.image(my.w, color.key = "quantile", n.levels = 250, legend.params = list(lab = "wavelet power levels", mar = 4.7))
+
+```
+
+```{r, include = FALSE}
+# Para plotar o espectro de potência da Wavelet faremos:
+wt.image(my.w, color.key = "quantile", n.levels = 250, legend.params = list(lab = "wavelet power levels", mar = 4.7))
+```
+
+# Conclusão
+
+* Ao longo do curso nos deparamos com diversos transformadores de regiões de 
+probabilidade. *(eg.: método Jacobiano)*.
+  
+* Esta aplicação é muito utilizada na área da física e mercado financeiro.
+
+* Conseguimos ter a percepção de que o "mapa de calor" proveniente da Wavelet é uma boa alternativa para verificar os coeficientes que possuem maiores pesos.
+
+# Referências
+  
+Morettin, Pedro A. (1999). ONDAS E ONDALETAS. Da Análise de Fourier à Análise de ondaletas 1 ed. [S.l.]: edUSP. 276 páginas. ISBN 8531405092
+  
+SHENG, Yunlong (2000). Wavelet Transform. cap. 10 - in Poularikas, A. - THE TRANSFORMS AND APPLICATIONS HANDBOOK 2 ed. Boca Raton: CRC Press
+  
+
