@@ -1,4 +1,4 @@
-setwd("~/UNI/2022-01/CE092/Semin·rio")
+setwd("~/UNI/2022-01/CE092/Semin√°rio")
 
 library(readr)
 library(WaveletComp)
